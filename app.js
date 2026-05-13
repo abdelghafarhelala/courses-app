@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 var cors = require('cors');
 const coursesRouter = require('./routes/courses.route');
+const userRouter = require('./routes/user.route');
 const httpStatusText = require('./utils/httpStatusText');
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/courses', coursesRouter);
+app.use('/api/users', userRouter);
 
 app.all("/{*splat}", (req, res) => {
     res.status(404).json({ status: httpStatusText.FAIL, message: "Route not found", data: null });

@@ -6,7 +6,7 @@ const validationSchema = require('../middelwares/validationSchema');
 router
     .route('/')
         .get(courseController.getAllCourses)
-        .post(validationSchema(),courseController.createCourse);
+        .post(validationSchema.validationSchema(),courseController.createCourse);
 
 router
     .route('/:id')

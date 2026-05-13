@@ -19,4 +19,44 @@ const validationSchema = ()=> {
         .withMessage('Price is required'),
 ]
 }
-module.exports = validationSchema
+const registerUserValidationSchema = ()=> {
+    return [
+    body('firstName')
+        .isString()
+        .withMessage('First name must be a string')
+        .notEmpty()
+        .withMessage('First name is required'),
+    body('lastName')
+        .isString()
+        .withMessage('Last name must be a string')
+        .notEmpty()
+        .withMessage('Last name is required'),
+    body('email')
+        .isEmail()
+        .withMessage('Invalid email')
+        .notEmpty()
+        .withMessage('Email is required'),
+    body('password')
+        .isLength({ min: 6 })
+        .withMessage('Password must be at least 6 characters long')
+        .notEmpty()
+        .withMessage('Password is required'),
+]
+}
+const loginValidationSchema = ()=> {
+    return [
+    body('email')
+        .isEmail()
+        .withMessage('Invalid email')
+        .notEmpty()
+        .withMessage('Email is required'),
+    body('password')
+        .isLength({ min: 6 })
+        .withMessage('Password must be at least 6 characters long')
+        .notEmpty()
+        .withMessage('Password is required'),
+]
+}
+
+module.exports = { validationSchema, registerUserValidationSchema, loginValidationSchema };
+      
