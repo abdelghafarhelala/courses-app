@@ -4,6 +4,7 @@ var cors = require('cors');
 const coursesRouter = require('./routes/courses.route');
 const userRouter = require('./routes/user.route');
 const httpStatusText = require('./utils/httpStatusText');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 4001;
@@ -11,6 +12,7 @@ const mongoose = require('mongoose');
 
 app.use(express.json());
 app.use(cors());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/courses', coursesRouter);
 app.use('/api/users', userRouter);

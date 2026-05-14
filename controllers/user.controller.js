@@ -2,7 +2,7 @@ const asyncWrapper = require("../middelwares/asyncWrapper");
 const User = require('../models/user.model');
 const httpStatusText = require('../utils/httpStatusText');
 const bcrypt = require('bcrypt');
-const generateToken = require('../utils/jwtHelper');
+const generateToken = require('../utils/generateToken');
 const { validationResult } = require("express-validator");
 const getAllUsers = asyncWrapper(async (req, res) => {
   
@@ -47,6 +47,10 @@ const register = asyncWrapper(async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ firstName, lastName, email, password: hashedPassword, role });
     const token = generateToken(user);
+    const file = req.file;
+    if (file) {
+        user.avatar = file.path;
+    }
     user.token = token;
     await user.save();
     res.json({ status: httpStatusText.SUCCESS, message: "Registration successful", data: {user:user, token:token } });

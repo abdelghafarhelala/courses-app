@@ -36,6 +36,7 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
+        default: null,
     },
 });
 
