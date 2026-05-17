@@ -31,7 +31,7 @@ app.use((err, req, res, next) => {
 const uri = process.env.MONGO_URL;
 mongoose.connect(uri).then(() => {
     console.log('Connected to MongoDB');
-    app.listen(port, () => {
+    app.listen(port, "0.0.0.0",() => {
         console.log(`Example app listening on port ${port}`);
     });
 }).catch((error) => {
